@@ -3,7 +3,7 @@
 🧩 PART I – THEORETICAL FOUNDATIONS
 Chapter 1. Introduction to AI Agents
 
-** 1.1 What is an AI Agent?
+**1.1 What is an AI Agent?
 
 Definition and purpose
 
