@@ -216,6 +216,8 @@ Tech: FastAPI + Docker + AWS Lambda
 
 Includes: CI/CD pipeline + GitHub Actions
 
+## **Project Structure**
+```
 ⚙️ GitHub Repository Structure Example
 Mastering-AI-Agents/
 │
@@ -240,6 +242,7 @@ Mastering-AI-Agents/
 └── .github/
     └── workflows/
         └── ci.yml
+```
 
 🧭 Appendices
 
