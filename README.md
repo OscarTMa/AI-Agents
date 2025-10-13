@@ -9,19 +9,19 @@ Definition and purpose
 
 Differences between chatbots, assistants, and autonomous agents
 
-1.2 Historical Evolution
+### 1.2 Historical Evolution
 
 From expert systems → LLMs → autonomous frameworks
 
 Key milestones: GPT, LangChain, AutoGPT, CrewAI
 
-1.3 Anatomy of an AI Agent
+### 1.3 Anatomy of an AI Agent
 
 Components: perception, reasoning, memory, action, feedback
 
 Diagram: “Agent System Loop”
 
-1.4 Types of AI Agents
+### 1.4 Types of AI Agents
 
 Reactive, deliberative, hybrid, multi-agent systems
 
@@ -29,129 +29,129 @@ Example diagram: decision-making hierarchy
 
 Chapter 2. Python Foundations for Agents
 
-2.1 Core Python Concepts
+### 2.1 Core Python Concepts
 
 Asyncio, Dataclasses, API requests, lists/dicts
 
 Handling concurrency and parallel tasks
 
-2.2 Data Structures for Agents
+### 2.2 Data Structures for Agents
 
 Using embeddings, dictionaries, and memory buffers
 
-2.3 Building APIs and Servers
+### 2.3 Building APIs and Servers
 
 FastAPI / Flask basics
 
 Example: agent endpoint to receive tasks
 
-2.4 Visualization
+### 2.4 Visualization
 
 Diagram: “Agent lifecycle in Python (request → response → feedback)”
 
 Chapter 3. Machine Learning & NLP Essentials
 
-3.1 Refresher: Supervised vs Unsupervised Learning
-3.2 NLP Core Concepts
+### 3.1 Refresher: Supervised vs Unsupervised Learning
+### 3.2 NLP Core Concepts
 
 Embeddings, tokenization, vectorization
 
 Cosine similarity and semantic search
 
-3.3 Model Families and APIs
+### 3.3 Model Families and APIs
 
 OpenAI, Anthropic, Hugging Face models
 
 Fine-tuning basics and prompt engineering
 
-3.4 Diagram:
+### 3.4 Diagram:
 
 “How embeddings power an agent’s memory and context”
 
 Chapter 4. Frameworks & Tools for Agents
 
-4.1 LangChain
+### 4.1 LangChain
 
 Chains, tools, agents
 
 Example: ReAct agent step-by-step
 
-4.2 LlamaIndex
+### 4.2 LlamaIndex
 
 Connecting private data sources
 
 Building document-based agents
 
-4.3 CrewAI, AutoGen, Semantic Kernel
+### 4.3 CrewAI, AutoGen, Semantic Kernel
 
 Collaboration and orchestration of multiple agents
 
-4.4 Databases & Memory Systems
+### 4.4 Databases & Memory Systems
 
 Pinecone, Chroma, Redis
 
 Vector databases explained visually
 
-4.5 Diagram:
+### 4.5 Diagram:
 
 “AI Agent Framework Stack” (showing LangChain, Redis, APIs)
 
 Chapter 5. Agent Architectures & Reasoning
 
-5.1 The ReAct Pattern
+### 5.1 The ReAct Pattern
 
 “Reason + Act” process explained
 
 Pseudocode and diagram
 
-5.2 Toolformer Architecture
+### 5.2 Toolformer Architecture
 
 Deciding which tools to use dynamically
 
-5.3 Reflexion and Chain-of-Thought Models
+### 5.3 Reflexion and Chain-of-Thought Models
 
 Self-improvement loops and feedback mechanisms
 
-5.4 Multi-Agent Collaboration
+### 5.4 Multi-Agent Collaboration
 
 Roles: CEO, Researcher, Developer
 
 Message passing and role definition
 
-5.5 Diagram:
+### 5.5 Diagram:
 
 “Information flow in a multi-agent system”
 
 Chapter 6. Integration & Deployment
 
-6.1 APIs & Automation
+### 6.1 APIs & Automation
 
 REST, GraphQL, Playwright, Selenium
 
-6.2 Cloud Infrastructure
+### 6.2 Cloud Infrastructure
 
 Docker, AWS, GCP, Kubernetes basics
 
 Monitoring and observability
 
-6.3 Data & Memory Management
+### 6.3 Data & Memory Management
 
 Redis queues, Pinecone vector search
 
-6.4 Diagram:
+### 6.4 Diagram:
 
 “End-to-end AI Agent Deployment Pipeline”
 
 Chapter 7. Advanced Topics & Future Trends
 
-7.1 Reinforcement Learning with Human Feedback (RLHF)
-7.2 Multi-modal Agents (text, vision, audio)
-7.3 Safety, Ethics & Governance in AI Agents
-7.4 Scaling & Optimization
+### 7.1 Reinforcement Learning with Human Feedback (RLHF)
+### 7.2 Multi-modal Agents (text, vision, audio)
+### 7.3 Safety, Ethics & Governance in AI Agents
+### 7.4 Scaling & Optimization
 
 Performance tuning, latency, cost control
 
-7.5 Diagram:
+### 7.5 Diagram:
 
 “Future Evolution of AI Agents: from single to swarm intelligence”
 
