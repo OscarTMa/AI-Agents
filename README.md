@@ -1,7 +1,7 @@
 # AI-Agents
 
 🧩 PART I – THEORETICAL FOUNDATIONS
-Chapter 1. Introduction to AI Agents
+## Chapter 1. Introduction to AI Agents
 
 ### 1.1 What is an AI Agent?
 
@@ -27,7 +27,7 @@ Reactive, deliberative, hybrid, multi-agent systems
 
 Example diagram: decision-making hierarchy
 
-Chapter 2. Python Foundations for Agents
+## Chapter 2. Python Foundations for Agents
 
 ### 2.1 Core Python Concepts
 
@@ -49,7 +49,7 @@ Example: agent endpoint to receive tasks
 
 Diagram: “Agent lifecycle in Python (request → response → feedback)”
 
-Chapter 3. Machine Learning & NLP Essentials
+## Chapter 3. Machine Learning & NLP Essentials
 
 ### 3.1 Refresher: Supervised vs Unsupervised Learning
 ### 3.2 NLP Core Concepts
@@ -68,7 +68,7 @@ Fine-tuning basics and prompt engineering
 
 “How embeddings power an agent’s memory and context”
 
-Chapter 4. Frameworks & Tools for Agents
+## Chapter 4. Frameworks & Tools for Agents
 
 ### 4.1 LangChain
 
@@ -96,7 +96,7 @@ Vector databases explained visually
 
 “AI Agent Framework Stack” (showing LangChain, Redis, APIs)
 
-Chapter 5. Agent Architectures & Reasoning
+## Chapter 5. Agent Architectures & Reasoning
 
 ### 5.1 The ReAct Pattern
 
@@ -122,7 +122,7 @@ Message passing and role definition
 
 “Information flow in a multi-agent system”
 
-Chapter 6. Integration & Deployment
+## Chapter 6. Integration & Deployment
 
 ### 6.1 APIs & Automation
 
@@ -142,7 +142,7 @@ Redis queues, Pinecone vector search
 
 “End-to-end AI Agent Deployment Pipeline”
 
-Chapter 7. Advanced Topics & Future Trends
+## Chapter 7. Advanced Topics & Future Trends
 
 ### 7.1 Reinforcement Learning with Human Feedback (RLHF)
 ### 7.2 Multi-modal Agents (text, vision, audio)
@@ -156,7 +156,7 @@ Performance tuning, latency, cost control
 “Future Evolution of AI Agents: from single to swarm intelligence”
 
 💻 PART II – PRACTICAL IMPLEMENTATION
-Project 1: CSV Data Q&A Agent
+## Project 1: CSV Data Q&A Agent
 
 Objective: Answer questions from CSV files
 
@@ -166,7 +166,7 @@ Key topics: prompt templates, tool usage, vector search
 
 GitHub folder: /data_agent/
 
-Project 2: Web Automation Agent
+## Project 2: Web Automation Agent
 
 Objective: Scrape and summarize web content
 
@@ -176,7 +176,7 @@ Includes: browser automation + summarization agent
 
 GitHub folder: /web_agent/
 
-Project 3: FAQ Support Agent
+## Project 3: FAQ Support Agent
 
 Objective: triage and answer customer tickets
 
@@ -184,7 +184,7 @@ Tech: FastAPI + Pinecone + OpenAI Functions
 
 Includes: context memory, retrieval, ranking
 
-Project 4: Multi-Agent Collaboration System
+## Project 4: Multi-Agent Collaboration System
 
 Objective: simulate a digital team (CEO, PM, Dev)
 
@@ -192,7 +192,7 @@ Tech: CrewAI or AutoGen
 
 Architecture diagram + example conversation
 
-Project 5: AI Research Assistant
+## Project 5: AI Research Assistant
 
 Objective: search, summarize, and cite sources
 
@@ -200,7 +200,7 @@ Tech: LangChain + SerpAPI + ChromaDB
 
 Output: automatic reports in Markdown
 
-Project 6: Streamlit AI Agent Dashboard
+## Project 6: Streamlit AI Agent Dashboard
 
 Objective: interactive dashboard for managing agents
 
@@ -208,7 +208,7 @@ Visualization: logs, task progress, reasoning chains
 
 Tech: Streamlit + FastAPI backend
 
-Project 7: Deploying an Agent API
+## Project 7: Deploying an Agent API
 
 Objective: expose your agent as an API endpoint
 
@@ -246,12 +246,12 @@ Mastering-AI-Agents/
 
 🧭 Appendices
 
-A. Key AI Agent Libraries and Resources
+### A. Key AI Agent Libraries and Resources
 
-B. Recommended Courses and Docs
+### B. Recommended Courses and Docs
 
-C. Prompts and Templates for LangChain
+### C. Prompts and Templates for LangChain
 
-D. Troubleshooting and Optimization
+### D. Troubleshooting and Optimization
 
-E. Glossary of Agent Terminology
+### E. Glossary of Agent Terminology
