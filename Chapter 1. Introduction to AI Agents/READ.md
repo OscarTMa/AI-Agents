@@ -27,3 +27,71 @@ Unlike traditional programs, AI agents can:
 
 A typical AI agent consists of the following components:
 
+┌────────────────────┐
+│ Environment │
+└──────┬─────────────┘
+│ Perception
+┌──────▼─────────────┐
+│ Input Parser │ ← (Text, Voice, Data)
+└──────┬─────────────┘
+│
+┌──────▼─────────────┐
+│ Reasoning Engine │ ← (LLMs, Rules, Prompts)
+└──────┬─────────────┘
+│
+┌──────▼─────────────┐
+│ Memory & Tools │ ← (Vector DB, APIs, Code)
+└──────┬─────────────┘
+│
+┌──────▼─────────────┐
+│ Action Layer │ ← (Outputs, Actions, Results)
+└────────────────────┘
+
+---
+
+## 🧩 Types of AI Agents
+
+| Type | Description | Example |
+|------|--------------|----------|
+| **Reactive Agents** | Respond directly to inputs without memory or reasoning. | Chatbot responding to commands. |
+| **Deliberative Agents** | Use reasoning and planning to achieve goals. | Customer support assistant. |
+| **Learning Agents** | Improve their behavior using ML models. | Personalized recommendation systems. |
+| **Multi-Agent Systems** | Multiple agents collaborating to complete complex tasks. | CEO–PM–Dev simulation for product creation. |
+
+---
+
+## 🧰 Examples of AI Agents in Use
+
+| Domain | Example |
+|---------|----------|
+| **Customer Support** | Chatbots powered by GPT or Claude handling FAQ. |
+| **Productivity** | Agents scheduling tasks or generating reports automatically. |
+| **Research** | Agents summarizing academic papers (Elicit, Scispace). |
+| **Coding** | AI Dev Agents generating and reviewing code (GitHub Copilot, Replit Ghostwriter). |
+| **Business Intelligence** | Agents that analyze financial data or build dashboards. |
+
+---
+
+## 🧱 From LLMs to Agents
+
+Large Language Models (LLMs) like **GPT, Claude, Mistral, LLaMA, Gemini** act as the *reasoning core* of most modern agents.
+
+**LLM → Agent Transformation**
+
+| Layer | Purpose |
+|-------|----------|
+| **Prompt Layer** | Defines instructions or roles. |
+| **Memory Layer** | Stores context or user history. |
+| **Tool Layer** | Connects the agent with APIs, databases, or external actions. |
+| **Controller Layer** | Manages reasoning flow and decision-making. |
+
+Example:
+```python
+agent = Agent(
+    llm="gpt-4",
+    memory="chroma",
+    tools=["serpapi", "python"],
+    controller="AutoGen"
+)
+agent.run("Summarize AI news and save results to CSV.")
+
