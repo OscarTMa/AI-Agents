@@ -26,7 +26,7 @@ Unlike traditional programs, AI agents can:
 ## ⚙️ Architecture of an AI Agent
 
 A typical AI agent consists of the following components:
-
+```
 ┌────────────────────┐
 │ Environment │
 └──────┬─────────────┘
@@ -46,7 +46,7 @@ A typical AI agent consists of the following components:
 ┌──────▼─────────────┐
 │ Action Layer │ ← (Outputs, Actions, Results)
 └────────────────────┘
-
+````
 ---
 
 ## 🧩 Types of AI Agents
