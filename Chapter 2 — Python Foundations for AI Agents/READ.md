@@ -24,6 +24,7 @@ They must:
 # ==========================================
 # 🧩 Python Foundations for AI Agents
 # ==========================================
+
 ```python
 # ──────────────────────────────────────────
 # 1️⃣ Import Core Libraries
@@ -92,7 +93,6 @@ async def respond_to_user(query: str):
 if __name__ == "__main__":
     asyncio.run(process_input("Hello Agent"))
     print("Agent initialized and ready.")
-
 ```
 
 User → FastAPI endpoint (/agent/respond)
