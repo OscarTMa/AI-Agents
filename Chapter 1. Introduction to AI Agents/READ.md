@@ -97,24 +97,24 @@ agent.run("Summarize AI news and save results to CSV.")
 ````
 ---
 ## 🌐 The Role of Agents in the AI Ecosystem"                                   
-description: >
+description:
   AI Agents are at the center of next-generation automation and intelligence.
   They serve as intelligent connectors between reasoning, data, and action layers
-  to enable autonomous systems across multiple domains.
-roles:                                                                          
-  - LLMs for reasoning
-  - Databases for memory
-  - Tools/APIs for execution
-  - Interfaces (CLI, Web, Voice) for interaction
+  to enable autonomous systems across multiple domains.                                                                     
+roles:                                                                                                                     
+  - LLMs for reasoning                                      
+  - Databases for memory                                               
+  - Tools/APIs for execution                                                 
+  - Interfaces (CLI, Web, Voice) for interaction                                                      
 applications:                                                                         
-  - Intelligent assistants 🤖
-  - Autonomous research systems 🔍
-  - Business automation workflows ⚙️
-  - Multi-agent organizations 🧑‍💼🤝👨‍💻
-key_takeaways:                                                                          
-  - "AI Agents extend the capabilities of LLMs beyond text generation."
-  - "They combine reasoning, tools, and memory for goal-oriented actions."
-  - "Modern frameworks like LangChain, AutoGen, CrewAI, and LangGraph simplify development."
-  - "Agents will define the next generation of intelligent applications."
+  - Intelligent assistants 🤖                                  
+  - Autonomous research systems 🔍                                      
+  - Business automation workflows ⚙️                                      
+  - Multi-agent organizations 🧑‍💼🤝👨‍💻                                        
+key_takeaways:                                                                           
+  - "AI Agents extend the capabilities of LLMs beyond text generation."                                       
+  - "They combine reasoning, tools, and memory for goal-oriented actions."                                                   
+  - "Modern frameworks like LangChain, AutoGen, CrewAI, and LangGraph simplify development."                                
+  - "Agents will define the next generation of intelligent applications."                                             
 ---
 
