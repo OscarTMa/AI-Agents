@@ -21,9 +21,9 @@ They must:
 
 ---
 
-# ==========================================
-# 🧩 Python Foundations for AI Agents
-# ==========================================
+### ==========================================
+### 🧩 Python Foundations for AI Agents
+### ==========================================
 
 ```python
 # ──────────────────────────────────────────
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     asyncio.run(process_input("Hello Agent"))
     print("Agent initialized and ready.")
 ```
-
+````
 User → FastAPI endpoint (/agent/respond)
         ↓
    process_input() → gather_information()
@@ -102,7 +102,7 @@ User → FastAPI endpoint (/agent/respond)
    dataclass stores state and memory
         ↓
    Response generated → returned to user
-
+````
 
 ## ✅ Key Takeaways
 
