@@ -116,95 +116,92 @@ from langchain.embeddings import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings()
 db = Chroma(persist_directory="./memory", embedding_function=embeddings)
+```
 
-sections:
-  - id: 4.6
-    title: "Memory and Vector Databases"
-    insight: >
-      Vector databases enable fast semantic retrieval and are essential for agents
-      with long-term contextual memory.
+💡**Insight:**
 
-  - id: 4.7
-    title: "API and Tool Integration"
-    overview: >
-      AI agents can extend their functionality through API and system integration.
-    integration_table:
-      - category: "External APIs"
-        examples: ["Google Search", "Slack", "Notion", "GitHub"]
-        function: "Access and manage external data"
-      - category: "Execution Environments"
-        examples: ["Python REPL", "Bash", "SQL"]
-        function: "Perform computational or database tasks"
-      - category: "Automation Tools"
-        examples: ["Make", "Zapier", "UiPath"]
-        function: "Automate repetitive business processes"
-    takeaway: "Integration = extended cognition + execution power"
+Vector databases enable fast semantic retrieval and are essential for agents with long-term contextual memory.
 
-  - id: 4.8
-    title: "No-Code & Visual Frameworks"
-    description: >
-      For non-programmers or rapid prototyping, visual platforms allow
-      drag-and-drop creation of agents with minimal code.
-    tools:
-      - name: "Flowise AI"
-        main_use: "Visual LangChain pipelines"
-        note: "Simplifies database and tool integration"
-      - name: "Lovable"
-        main_use: "No-code AI app builder"
-        note: "Ideal for prototypes and startups"
-      - name: "Relevance AI"
-        main_use: "Business data agents"
-        note: "Dashboard and analytics focus"
-      - name: "a0.dev / Rork"
-        main_use: "Visual customizable agents"
-        note: "Developer-friendly and extensible"
-    insight: >
-      No-code frameworks democratize AI agent creation and speed up iteration cycles.
+---
+## 4.7. API and Tool Integration
 
-  - id: 4.9
-    title: "Framework Comparison"
-    comparison_table:
-      - framework: "LangChain"
-        technical_level: "Medium–High"
-        typical_use: "Custom AI agents"
-        language: "Python / JS"
-        key_feature: "Flexibility"
-      - framework: "CrewAI"
-        technical_level: "Medium"
-        typical_use: "Multi-agent workflows"
-        language: "Python"
-        key_feature: "Collaboration"
-      - framework: "AutoGen"
-        technical_level: "High"
-        typical_use: "LLM-to-LLM conversation"
-        language: "Python"
-        key_feature: "Structured dialogue"
-      - framework: "LangGraph"
-        technical_level: "High"
-        typical_use: "Agent orchestration"
-        language: "Python"
-        key_feature: "Graph-based coordination"
-      - framework: "Flowise"
-        technical_level: "Low"
-        typical_use: "Visual creation"
-        language: "No-Code"
-        key_feature: "Ease of use"
-    takeaway: >
-      Choose your framework according to technical level and project complexity.
+### Overview
+AI agents can extend their functionality through **API** and **system integration**.
 
-  - id: 4.10
-    title: "Chapter Summary"
-    core_idea: >
-      Mastering these frameworks transforms a single LLM into a coordinated intelligent system.
-    learning_path:
-      - "Understand LangChain’s structure and build a simple agent."
-      - "Add memory and external tool integrations."
-      - "Explore CrewAI or AutoGen for multi-agent workflows."
-      - "Experiment with LangGraph or No-Code tools for orchestration."
-      - "Deploy with persistent memory and API access."
-    outcome: >
-      You’ll gain the ability to design, orchestrate, and deploy fully autonomous
-      AI agents using modern frameworks.
+| Category | Examples | Function |
+|-----------|-----------|-----------|
+| **External APIs** | Google Search, Slack, Notion, GitHub | Access and manage external data |
+| **Execution Environments** | Python REPL, Bash, SQL | Perform computational or database tasks |
+| **Automation Tools** | Make, Zapier, UiPath | Automate repetitive business processes |
+
+👉 **Integration = extended cognition + execution power**
+
 ---
 
+## 4.8. No-Code & Visual Frameworks
 
+### Description
+For **non-programmers** or **rapid prototyping**, visual platforms allow **drag-and-drop creation** of agents with minimal code.
+
+| Tool | Main Use | Note |
+|------|-----------|------|
+| **Flowise AI** | Visual LangChain pipelines | Simplifies database and tool integration |
+| **Lovable** | No-code AI app builder | Ideal for prototypes and startups |
+| **Relevance AI** | Business data agents | Dashboard and analytics focus |
+| **a0.dev / Rork** | Visual customizable agents | Developer-friendly and extensible |
+
+💡 **Insight:**  
+No-code frameworks democratize AI agent creation and **speed up iteration cycles**.
+
+---
+
+## 4.9. Framework Comparison
+
+| Framework | Technical Level | Typical Use | Language | Key Feature |
+|------------|----------------|--------------|-----------|--------------|
+| **LangChain** | Medium–High | Custom AI agents | Python / JS | Flexibility |
+| **CrewAI** | Medium | Multi-agent workflows | Python | Collaboration |
+| **AutoGen** | High | LLM-to-LLM conversation | Python | Structured dialogue |
+| **LangGraph** | High | Agent orchestration | Python | Graph-based coordination |
+| **Flowise** | Low | Visual creation | No-Code | Ease of use |
+
+🧭 **Takeaway:**  
+Choose your framework according to **technical level** and **project complexity**.
+
+---
+
+## 4.10. Chapter Summary
+
+### Core Idea
+Mastering these frameworks transforms a single **LLM** into a **coordinated intelligent system**.
+
+### Recommended Learning Path
+1. Understand **LangChain’s structure** and build a simple agent.  
+2. Add **memory** and **external tool integrations**.  
+3. Explore **CrewAI** or **AutoGen** for **multi-agent workflows**.  
+4. Experiment with **LangGraph** or **No-Code tools** for orchestration.  
+5. Deploy with **persistent memory** and **API access**.
+
+### Outcome
+You’ll gain the ability to **design, orchestrate, and deploy fully autonomous AI agents** using modern frameworks.
+
+---
+## 📁 Folder Structure
+
+```bash
+Capítulo 4 — Tools & Frameworks for AI Agents/
+│
+├── README.md                     # Chapter overview and insights
+├── examples/
+│   ├── langchain_agent.py        # Example using LangChain
+│   ├── crewai_agent.py           # Example using CrewAI
+│   ├── autogen_conversation.py   # LLM-to-LLM dialogue with AutoGen
+│   ├── langgraph_workflow.py     # Agent orchestration with LangGraph
+│   └── flowise_demo.png          # Visual representation of Flowise pipeline
+│
+├── docs/
+│   ├── framework_comparison.md   # Extended analysis of tools
+│   └── no_code_tools_overview.md # Notes on Flowise, Relevance AI, etc.
+│
+└── requirements.txt              # Required dependencies
+```
