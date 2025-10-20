@@ -70,13 +70,13 @@ We use python-dotenv to load environment variables securely instead of hardcodin
 from langchain.agents import initialize_agent, load_tools
 from langchain.llms import OpenAI
 
-# Initialize the model
+### Initialize the model
 llm = OpenAI(temperature=0.7)
 
-# Load tools
+### Load tools
 tools = load_tools(["serpapi", "llm-math"], llm=llm)
 
-# Create the agent
+### Create the agent
 agent = initialize_agent(
     tools, 
     llm, 
@@ -84,7 +84,7 @@ agent = initialize_agent(
     verbose=True
 )
 
-# Test execution
+### Test execution
 agent.run("Summarize the latest trends in AI agents in 3 bullet points.")
 
 
