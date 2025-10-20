@@ -96,7 +96,7 @@ if query:
 docker build -t research-agent .
 ````
 
-### 🧩 Run the container locally
+### 🧩 Run the container locally                                        
 
 docker run -p 8501:8501 research-agent
 ```
