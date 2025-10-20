@@ -1,11 +1,11 @@
 ---
-title: "Chapter 3 — Machine Learning & NLP Fundamentals"
-description: >
-  Learn the foundational concepts behind Natural Language Processing (NLP)
-  and Machine Learning for AI Agents. Understand embeddings, tokenization,
-  and fine-tuning — the core mechanisms that allow agents to learn, represent,
-  and recall information intelligently.
-concepts:
+title: "Chapter 3 — Machine Learning & NLP Fundamentals"                                                           
+description:                                    
+  Learn the foundational concepts behind Natural Language Processing (NLP)                     
+  and Machine Learning for AI Agents. Understand embeddings, tokenization,                                
+  and fine-tuning — the core mechanisms that allow agents to learn, represent,                         
+  and recall information intelligently.                                           
+concepts:                                                       
   - Embeddings and vectorization
   - Tokenization and language modeling
   - Basic model training and fine-tuning
