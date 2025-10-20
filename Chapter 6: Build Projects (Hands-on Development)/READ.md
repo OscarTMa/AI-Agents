@@ -98,11 +98,12 @@ docker build -t research-agent .
 
 ### 🧩 Run the container locally                                        
 
+```bash
 docker run -p 8501:8501 research-agent
 ```
 
-```
-### 🌐 Access the web interface
+### 🌐 Access the web interface                             
+
 ```bash
 http://localhost:8501
 ````
