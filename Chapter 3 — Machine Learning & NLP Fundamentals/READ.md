@@ -61,3 +61,34 @@ When a new query arrives, the agent searches for the most **semantically similar
 ```text
 User Query → Embedding → Compare with Memory → Retrieve Similar Context → Generate Response
 
+````
+##  🧬 3. Embedding Pipeline (Conceptual Diagram)
+Raw Text
+   ↓
+[ Tokenization ]
+   ↓
+[ Embedding Model ] → Vector Representation
+   ↓
+[ Storage in Memory DB ]
+   ↓
+[ Retrieval for Reasoning ]
+
+## 📚 7. Summary
+
+✅ Embeddings: Represent meaning in numeric form.
+✅ Tokenization: Converts language into interpretable units.
+✅ Fine-tuning: Customizes model behavior for domain tasks.
+✅ Vector Memory: Enables contextual recall and reasoning.
+
+Together, these are the cognitive building blocks that make AI Agents intelligent and memory-aware.
+
+## 🔗 Recommended Reading
+
+Hugging Face Transformers Documentation
+
+OpenAI Embeddings Guide
+
+Anthropic Claude Overview
+
+Sentence Transformers
+
