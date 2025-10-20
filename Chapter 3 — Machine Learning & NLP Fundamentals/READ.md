@@ -1,31 +1,4 @@
 ---
-title: "Chapter 3 — Machine Learning & NLP Fundamentals"                                                           
-description:                                    
-  Learn the foundational concepts behind Natural Language Processing (NLP)                     
-  and Machine Learning for AI Agents. Understand embeddings, tokenization,                                
-  and fine-tuning — the core mechanisms that allow agents to learn, represent,                         
-  and recall information intelligently.                                           
-concepts:                                                       
-  - Embeddings and vectorization
-  - Tokenization and language modeling
-  - Basic model training and fine-tuning
-  - Integration with base models (OpenAI, Anthropic, Hugging Face)
-  - Memory and embeddings in agent architecture
-objectives:
-  - Build a foundational understanding of NLP concepts for AI agent development
-  - Learn how embeddings enable contextual memory and retrieval
-  - Explore the process of model fine-tuning and API-based inference
-key_takeaways:
-  - "Embeddings transform text into mathematical space for reasoning."
-  - "Tokenization defines how models interpret and segment language."
-  - "Fine-tuning customizes pretrained models for specific agent tasks."
-  - "Agents use embeddings to simulate long-term contextual memory."
-tools:
-  - Python
-  - scikit-learn
-  - Hugging Face Transformers
-  - OpenAI API
----
 
 # 🤖 Chapter 3 — Machine Learning & NLP Fundamentals
 
@@ -60,9 +33,11 @@ When a new query arrives, the agent searches for the most **semantically similar
 
 ```text
 User Query → Embedding → Compare with Memory → Retrieve Similar Context → Generate Response
+````
+
+##  🧬 3. Embedding Pipeline (Conceptual Diagram)
 
 ````
-##  🧬 3. Embedding Pipeline (Conceptual Diagram)
 Raw Text
    ↓
 [ Tokenization ]
@@ -73,14 +48,16 @@ Raw Text
    ↓
 [ Retrieval for Reasoning ]
 
-## 📚 7. Summary
+````
 
-✅ Embeddings: Represent meaning in numeric form.
-✅ Tokenization: Converts language into interpretable units.
-✅ Fine-tuning: Customizes model behavior for domain tasks.
-✅ Vector Memory: Enables contextual recall and reasoning.
+## 📚 4. Summary                                    
 
-Together, these are the cognitive building blocks that make AI Agents intelligent and memory-aware.
+✅ Embeddings: Represent meaning in numeric form.                                  
+✅ Tokenization: Converts language into interpretable units.                               
+✅ Fine-tuning: Customizes model behavior for domain tasks.                        
+✅ Vector Memory: Enables contextual recall and reasoning.                                                   
+
+Together, these are the cognitive building blocks that make AI Agents intelligent and memory-aware.                              
 
 ## 🔗 Recommended Reading
 
