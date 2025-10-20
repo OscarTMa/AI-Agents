@@ -86,3 +86,44 @@ if query:
         response = agent.run(query)
         st.success("✅ Done!")
         st.write(response)
+
+````
+## ☁️ Deployment
+
+### 🧱 Build the Docker image                     
+
+```bash
+docker build -t research-agent .
+````
+### 🧩 Run the container locally
+```bash
+docker run -p 8501:8501 research-agent
+```bash
+
+```
+### 🌐 Access the web interface
+```bash
+http://localhost:8501
+````
+### 🚀 (Optional) Deploy to
+
+- Streamlit Cloud
+- AWS ECS / Google Cloud Run
+- Kubernetes cluster for scalable orchestration
+````
+
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
