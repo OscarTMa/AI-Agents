@@ -128,16 +128,16 @@ print(response)
 Here we simulate reasoning by chaining LLM prompts using LLMChain.
 Each chain processes a subtask (e.g., reasoning, summarization) and passes results to the next step.
 
-##  5.7. Visualization in Notebook
+##  5.7. Visualization in Notebook                                 
 
-Create /notebooks/exploration.ipynb for experimentation:
+Create /notebooks/exploration.ipynb for experimentation:                                  
 
-from langchain.llms import OpenAI
-from langchain import PromptTemplate, LLMChain
+from langchain.llms import OpenAI                                             
+from langchain import PromptTemplate, LLMChain                                                  
 
-prompt = PromptTemplate.from_template("Explain {concept} in simple terms.")
-chain = LLMChain(llm=OpenAI(temperature=0.6), prompt=prompt)
-chain.run("Multi-agent systems")
+prompt = PromptTemplate.from_template("Explain {concept} in simple terms.")                                                    
+chain = LLMChain(llm=OpenAI(temperature=0.6), prompt=prompt)                                                   
+chain.run("Multi-agent systems")                                         
 
 
 🧩 **Explanation:**
