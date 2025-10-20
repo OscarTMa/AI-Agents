@@ -112,9 +112,6 @@ http://localhost:8501
 - Streamlit Cloud
 - AWS ECS / Google Cloud Run
 - Kubernetes cluster for scalable orchestration
-````
-
-````
 
 
 
