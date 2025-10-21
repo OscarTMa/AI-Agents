@@ -59,7 +59,7 @@ Persistent memory turns a *chatbot* into a *learning agent*.
 
 ### 📊 Diagram: *"End-to-End AI Agent Deployment Pipeline"*
 
-```mermaid
+```
 flowchart LR
     subgraph Local
     A[LLM Agent] --> B[LangChain Workflow]
@@ -155,7 +155,6 @@ Scalability	This service can be containerized and deployed in Kubernetes.
 
 Dockerfile
 ````dockerfile
-Copier le code
 FROM python:3.10
 WORKDIR /app
 COPY . .
@@ -163,7 +162,7 @@ RUN pip install fastapi uvicorn redis
 CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "8080"]
 ````
 
-**hasta aqui**
+
 
 
 
