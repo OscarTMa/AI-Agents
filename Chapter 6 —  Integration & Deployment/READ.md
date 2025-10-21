@@ -1,4 +1,4 @@
- 🧠 Chapter 6. Integration & Deployment
+# 🧠 Chapter 6. Integration & Deployment
 
 ## 📘 Overview
 This chapter focuses on integrating AI agents into production environments — connecting APIs, automating workflows, deploying at scale, and managing memory and data persistence.  
@@ -73,9 +73,6 @@ flowchart LR
     F --> G[Monitoring (Prometheus)]
     F --> H[Vector DB (Pinecone)]
     F --> I[Redis Queue]
-
-    style A fill:#ffd,stroke:#333,stroke-width:1px
-    style F fill:#def,stroke:#333,stroke-width:1px
 ````
 
 ## 🚀 Deployment Guide (Metacode)
@@ -145,7 +142,8 @@ def handle_agent_request(data: Query):
     return {"previous_context": previous_context, "response": response}
 ````
 
-🧠 Code Explanation
+## 🧠 Code Explanation                                   
+
 **Section	Description**
 
 FastAPI	Defines a RESTful interface for agent communication.
