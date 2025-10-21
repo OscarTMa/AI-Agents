@@ -79,15 +79,16 @@ Developer	Implements or tests proposed solutions
 💬 Message Passing
 
 Agents exchange structured messages:
-
+````
 [CEO → Researcher]: Find top 3 AI trends in 2025.
 [Researcher → CEO]: Trends identified: Multi-agent systems, LLM agents, AI orchestration.
 [CEO → Developer]: Implement a dashboard summarizing these insights.
-
+````
 
 This architecture supports parallel reasoning and task specialization.
 
 ## 5.5 Diagram — “Information Flow in a Multi-Agent System”
+````
 flowchart LR
     A[User Input] --> B[CEO Agent]
     B --> C[Researcher Agent]
@@ -97,6 +98,7 @@ flowchart LR
     C --> B
     D --> B
     B --> G[Final Response]
+````
 
 ## 🧩 Key Takeaways
 
@@ -109,7 +111,6 @@ Reflexion = self-evaluation loop for continuous improvement.
 Multi-Agent Systems = collaboration and communication for scalability.
 
 🧠 Mastering these architectures enables the creation of autonomous, scalable, and adaptive AI systems.
-
 
 ---
 
