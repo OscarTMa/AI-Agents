@@ -135,15 +135,21 @@ print(response)
 This implements a ReAct-style agent that reasons (thinks) and acts (uses search and math tools) to answer queries dynamically.
 
 ## ⚙️ Reflexion Loop Example
+
+````python
 from langchain import LLMChain, PromptTemplate
 from langchain.llms import OpenAI
+````
 
+````
 template = """
 Question: {question}
 First answer: {initial_answer}
 Reflect on your answer and improve it.
 Improved answer:
 """
+````
+
 ````python
 prompt = PromptTemplate(
     input_variables=["question", "initial_answer"],
