@@ -19,11 +19,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f AI-Agents/Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent/requirements.txt ]; then
-            pip install -r AI-Agents/Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent/requirements.txt
+          if [ -f Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent/requirements.txt ]; then
+            pip install -r Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent/requirements.txt
           fi
 
       - name: Run app.py
-        working-directory: AI-Agents/Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent
+        working-directory: Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent
         run: |
           python app.py
