@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from dotenv import load_dotenv
-from langchain.agents import create_csv_agent
+from langchain_experimental.agents import create_csv_agent
 from langchain.llms import OpenAI
 from utils import save_uploaded_file
 
@@ -23,7 +23,7 @@ if uploaded_file is not None:
     # Initialize the agent
     agent = create_csv_agent(
         OpenAI(temperature=0, openai_api_key=openai_api_key),
-        csv_path,
+        "example.csv",
         verbose=True
     )
 
