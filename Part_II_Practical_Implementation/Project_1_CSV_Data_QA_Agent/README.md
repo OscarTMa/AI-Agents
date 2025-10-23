@@ -52,7 +52,7 @@ docker build -t csv-agent .
 docker run -p 8501:8501 csv-agent
 ```
 
-## 📦 Example Folder Structure
+## 📦 Folder Structure
 ```bash
 /projects/data_agent/
     ├── README.md
@@ -61,3 +61,45 @@ docker run -p 8501:8501 csv-agent
     ├── requirements.txt
     └── example.csv
 ```
+## 🧭 Explanation of the Code
+
+|File|	Description|
+|----------|--------------|
+|app.py	|The main Streamlit web application. Handles file upload, question input, and response display.|
+|utils.py	|Helper functions, e.g., saving temporary files.|
+|requirements.txt	|All Python dependencies required to run the agent.|
+|.env	|Contains your OpenAI API key for authentication.|
+|example.csv	|A sample dataset for quick testing.|
+
+## Key Learnings
+- Using LangChain CSV Agent
+- Implementing LLM reasoning over structured data
+- Designing a Streamlit UI for interaction
+- Optional: Deploying with Docker
+
+## 🚀 Optional Enhancements
+- Add memory using ConversationBufferMemory (LangChain)
+- Integrate Pinecone for persistent embeddings
+- Deploy the container to AWS ECS or Streamlit Cloud
+
+##  🧠 Exemples of questions
+- What is the average salary of employees?
+- Who are the employees in the Engineering department?
+- Which department has the highest average salary?
+- Who has more than 5 years of experience?
+- What is the total salary cost for the Marketing team?
+- List all employees working in Chicago.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
