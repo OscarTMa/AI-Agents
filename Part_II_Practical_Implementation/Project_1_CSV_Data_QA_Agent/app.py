@@ -1,44 +1,37 @@
+# app.py
 import os
-import streamlit as st
-from dotenv import load_dotenv
-from langchain_experimental.agents import create_csv_agent
-from langchain.llms import OpenAI
-from utils import save_uploaded_file
+import pandas as pd
+from langchain.agents import create_csv_agent
+from langchain.chat_models import ChatOpenAI
 
-# Load environment variables
-load_dotenv()
-openai_api_key = os.getenv("OPENAI_API_KEY")
+# -------------------------------
+# Set your OpenAI API Key
+# -------------------------------
+os.environ["OPENAI_API_KEY"] = "sk-your-key-here"  # Reemplaza con tu clave
 
-st.set_page_config(page_title="CSV Data Q&A Agent", page_icon="🧠", layout="wide")
+# -------------------------------
+# CSV file path
+# -------------------------------
+csv_file = "example.csv"  # Asegúrate de tener tu CSV en la misma carpeta
 
-st.title("🧩 CSV Data Q&A Agent")
-st.markdown("Ask questions directly from your CSV file using an AI Agent powered by **LangChain + OpenAI**.")
+# -------------------------------
+# Create agent
+# -------------------------------
+# LangChain >0.2.0 usa 'create_csv_agent' desde langchain.agents.csv
+# Si la versión actual no lo soporta, instalar langchain==0.0.267
+agent = create_csv_agent(
+    ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo"),
+    csv_file,
+    verbose=True
+)
 
-uploaded_file = st.file_uploader("📤 Upload your CSV file", type=["csv"])
-
-if uploaded_file is not None:
-    csv_path = save_uploaded_file(uploaded_file)
-    st.success(f"✅ File uploaded successfully: {uploaded_file.name}")
-
-    # Initialize the agent
-    agent = create_csv_agent(
-        OpenAI(temperature=0, openai_api_key=openai_api_key),
-        "example.csv",
-        verbose=True
-    )
-    agent.run("What is the average value in column X?")
-
-    # Input for natural language questions
-    user_query = st.text_input("💬 Ask your question about the CSV data:")
-
-    if user_query:
-        with st.spinner("🤔 Thinking..."):
-            try:
-                response = agent.run(user_query)
-                st.subheader("🧠 Response:")
-                st.write(response)
-            except Exception as e:
-                st.error(f"❌ Error: {e}")
-
-else:
-    st.info("⬆️ Please upload a CSV file to begin.")
+# -------------------------------
+# Run agent
+# -------------------------------
+while True:
+    query = input("Ask a question about the CSV (or type 'exit'): ")
+    if query.lower() in ["exit", "quit"]:
+        print("Exiting agent.")
+        break
+    response = agent.run(query)
+    print("Answer:", response)
