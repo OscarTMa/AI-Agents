@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
            python -m pip install --upgrade pip
-           pip install langchain langchain-experimental openai pandas
+           pip install "langchain==0.0.267" "langchain-experimental==0.0.43" openai pandas
            if [ -f Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent/requirements.txt ]; then
               pip install -r Part_II_Practical_Implementation/Project_1_CSV_Data_QA_Agent/requirements.txt
            fi
