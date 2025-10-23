@@ -1,4 +1,4 @@
-name: Run app.py manually
+name: Run app.py  manually
 
 on:
   workflow_dispatch:
