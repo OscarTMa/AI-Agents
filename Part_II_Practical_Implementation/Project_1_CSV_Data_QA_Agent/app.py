@@ -26,6 +26,7 @@ if uploaded_file is not None:
         "example.csv",
         verbose=True
     )
+    agent.run("What is the average value in column X?")
 
     # Input for natural language questions
     user_query = st.text_input("💬 Ask your question about the CSV data:")
