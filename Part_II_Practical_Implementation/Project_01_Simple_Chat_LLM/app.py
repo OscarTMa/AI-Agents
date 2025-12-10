@@ -1,5 +1,5 @@
 import streamlit as st
-from groq import Groq  
+from groq import Groq  # <--- CAMBIO 1: Importamos Groq
 
 # 1. Page Configuration
 st.set_page_config(page_title="Llama 3 Chat Agent", page_icon="🦙")
