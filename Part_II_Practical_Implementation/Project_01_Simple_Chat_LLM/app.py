@@ -1,5 +1,5 @@
 import streamlit as st
-from groq import Groq  # <--- CAMBIO 1: Importamos Groq
+from groq import Groq  
 
 # 1. Page Configuration
 st.set_page_config(page_title="Llama 3 Chat Agent", page_icon="🦙")
@@ -20,7 +20,7 @@ with st.sidebar:
             st.warning("Please enter your Groq API Key to proceed.", icon="⚠️")
             st.stop()
     
-    # CAMBIO 2: Modelos disponibles en Groq (Gratuitos)
+    # Modelos disponibles en Groq (Gratuitos)
     model_choice = st.selectbox(
         "Select Model", 
         ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768"]
