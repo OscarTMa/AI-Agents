@@ -6,7 +6,7 @@
 ![Groq](https://img.shields.io/badge/AI-Llama3_70b-orange)
 
 ### 🚀 Live Demo
-[Haz clic aquí para probar la App](AQUI_TU_LINK_DE_STREAMLIT_CLOUD)
+
 
 ---
 
@@ -16,8 +16,6 @@ This project is an implementation of a **Stateful AI Conversational Agent**. Unl
 It leverages **Groq's LPU (Language Processing Unit)** inference engine to deliver near-instant responses using the **Meta Llama 3 70B** model.
 
 ### 🖼️ Demo
-*(Aquí colocas el link a tu GIF o una captura de pantalla de la app funcionando)*
-![App Screenshot](ruta_de_tu_imagen.png)
 
 ### 🛠️ Key Technical Features
 * **State Management:** Implemented persistent memory using `st.session_state` to handle multi-turn conversations in a stateless web framework.
