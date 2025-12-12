@@ -1,11 +1,8 @@
 import os
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter  # <--- ESTO FALLA A VECES
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_groq import ChatGroq
-from langchain.chains import RetrievalQA
 
 # Configuración de página
 st.set_page_config(page_title="PDF RAG Brain", page_icon="🧠")
