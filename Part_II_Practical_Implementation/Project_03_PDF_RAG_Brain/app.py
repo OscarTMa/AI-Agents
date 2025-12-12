@@ -1,10 +1,11 @@
 import os
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter # <--- IMPORTACIÓN MÁS SEGURA
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
+# Importación directa desde langchain.chains
 from langchain.chains import RetrievalQA
 
 # Configuración de página
