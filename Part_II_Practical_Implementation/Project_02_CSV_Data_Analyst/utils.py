@@ -34,7 +34,7 @@ def execute_pandas_code(df, query, api_key):
     # 2. Get Code from LLM
     try:
         completion = client.chat.completions.create(
-            model="llama3-70b-8192", # 70b is smarter for coding
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": query}
