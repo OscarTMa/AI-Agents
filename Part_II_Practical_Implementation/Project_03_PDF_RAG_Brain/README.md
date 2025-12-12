@@ -26,3 +26,19 @@ graph LR
     D --> F
     F --> G{Groq LLM}
     G --> H[Answer]
+```
+## How to Run
+Install dependencies:
+
+```Bash
+pip install -r requirements.txt
+```
+Run the app:
+
+```Bash
+streamlit run app.py
+```
+## Enter your Groq API Key in the sidebar and upload a PDF.
+
+
+
