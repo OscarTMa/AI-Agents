@@ -42,13 +42,35 @@ def get_video_id(url):
     return None
 
 def get_transcript(video_id):
-    """Obtiene los subtítulos del video (falla si no tiene subs)"""
+    """
+    Obtiene subtítulos. Si no hay en inglés, busca cualquiera y lo traduce.
+    """
     try:
-        transcript_list = YouTubeTranscriptApi.get_transcript(video_id, languages=['en', 'es'])
-        # Unir todo el texto en un solo string
-        full_text = " ".join([item['text'] for item in transcript_list])
+        # 1. Obtener la lista de transcriptores disponibles (manuales y auto)
+        transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+
+        # 2. Lógica de prioridad:
+        # Intentamos buscar inglés manual o autogenerado
+        try:
+            transcript = transcript_list.find_transcript(['en', 'en-US', 'es', 'es-419'])
+        except:
+            # Si falla, tomamos el PRIMERO que exista (cualquier idioma)
+            transcript = next(iter(transcript_list))
+        
+        # 3. Traducir si es necesario (para que Llama 3 entienda mejor)
+        # Si el idioma no es inglés, lo traducimos a inglés
+        if not transcript.language_code.startswith('en'):
+            transcript = transcript.translate('en')
+
+        # 4. Descargar y formatear
+        transcript_pieces = transcript.fetch()
+        full_text = " ".join([item['text'] for item in transcript_pieces])
+        
         return full_text
+
     except Exception as e:
+        # Esto ocurre si el video está bloqueado o NO tiene ningún subtítulo
+        print(f"Error: {e}") 
         return None
 
 # --- 3. LÓGICA DEL AGENTE ---
