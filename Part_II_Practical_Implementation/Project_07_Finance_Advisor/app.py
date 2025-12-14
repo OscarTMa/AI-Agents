@@ -3,29 +3,26 @@ import yfinance as yf
 import pandas as pd
 from langchain_groq import ChatGroq
 from langchain.agents import create_tool_calling_agent, AgentExecutor
-from langchain_core.tools import Tool
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.callbacks import StreamlitCallbackHandler
+
+# Importamos las funciones ya decoradas
 from tools import get_stock_info, get_historical_prices
 
-# -----------------------------------------------
 st.set_page_config(page_title="AI Financial Analyst", page_icon="📈", layout="wide")
-#
+
 st.title("📈 Project 07: AI Financial Analyst")
 st.caption("Powered by Groq (Llama 3.3) & Yahoo Finance")
 
-# -----------------------------------------------
 # --- 1. CONFIGURACIÓN ---
 with st.sidebar:
     st.header("Configuration")
     if "GROQ_API_KEY" in st.secrets:
         api_key = st.secrets["GROQ_API_KEY"]
-        st.success("API Key loaded!", icon="✅")
     else:
         api_key = st.text_input("Groq API Key", type="password")
-
-    st.markdown("---")
-    st.markdown("**Example Tickers:** AAPL, TSLA, NVDA, MSFT, BTC-USD")
+    
+    st.markdown("Example Tickers: AAPL, NVDA, TSLA, MSFT")
 
 if not api_key:
     st.warning("Please enter your Groq API Key.")
@@ -33,19 +30,9 @@ if not api_key:
 
 # --- 2. CONFIGURACIÓN DEL AGENTE ---
 
-# Definir las herramientas para LangChain
-tools = [
-    Tool(
-        name="Get Stock Fundamentals",
-        func=get_stock_info,
-        description="Use this to get current price, PE ratio, and fundamental info of a stock. Input: Ticker symbol (e.g., AAPL)."
-    ),
-    Tool(
-        name="Get Historical Trend",
-        func=get_historical_prices,
-        description="Use this to get the price trend over the last month. Input: Ticker symbol."
-    )
-]
+# CAMBIO CRÍTICO: Simplemente pasamos la lista de funciones decoradas
+# Ya no usamos la clase Tool(...) manual que causaba el error
+tools = [get_stock_info, get_historical_prices] 
 
 llm = ChatGroq(
     groq_api_key=api_key, 
@@ -53,78 +40,67 @@ llm = ChatGroq(
     temperature=0
 )
 
-# Prompt del Sistema (System Prompt) - Dando personalidad financiera
 prompt = ChatPromptTemplate.from_messages([
     ("system", """You are a Wall Street Financial Analyst.
-    Your goal is to help users analyze stocks using real-time data.
+    Use the provided tools to get REAL-TIME data. 
+    Do not guess prices.
     
-    GUIDELINES:
-    1. Always use the tools to get REAL data. Do not guess prices.
-    2. Analyze the P/E ratio and trends.
-    3. Be professional but concise.
-    4. MANDATORY: End every response with: 
-       "⚠️ **Disclaimer:** This is an AI analysis, not professional financial advice. Do your own research."
+    If the user asks about a company, ALWAYS check its fundamentals first.
+    End with: "⚠️ **Disclaimer:** Not financial advice."
     """),
     ("human", "{input}"),
     ("placeholder", "{agent_scratchpad}"),
 ])
 
+# Ahora el agente puede "bindear" las herramientas correctamente
 agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
 
-# --- 3. INTERFAZ VISUAL DE MERCADO ---
+# --- 3. INTERFAZ ---
 
 col1, col2 = st.columns([1, 2])
 
 with col1:
-    st.subheader("Market Dashboard")
-    ticker_input = st.text_input("Enter Ticker Symbol:", value="AAPL").upper()
+    st.subheader("Market Data")
+    ticker_input = st.text_input("Ticker Symbol:", value="NVDA").upper()
     
     if ticker_input:
-        # Mini-dashboard visual sin usar IA (Datos crudos)
         try:
+            # Gráfico simple sin IA para referencia visual
             stock = yf.Ticker(ticker_input)
-            hist = stock.history(period="6mo")
-            
-            # Métricas
-            current_price = hist['Close'].iloc[-1]
-            prev_price = hist['Close'].iloc[-2]
-            delta = current_price - prev_price
-            
-            st.metric("Current Price", f"${current_price:.2f}", f"{delta:.2f}")
-            
-            # Gráfico
-            st.line_chart(hist['Close'], height=200)
-            
-        except Exception as e:
-            st.error("Invalid Ticker")
-
-# --- 4. INTERFAZ DE CHAT (EL AGENTE) ---
+            hist = stock.history(period="3mo")
+            if not hist.empty:
+                st.line_chart(hist['Close'], height=200)
+                curr = hist['Close'].iloc[-1]
+                st.metric("Price", f"${curr:.2f}")
+        except:
+            st.error("Ticker not found")
 
 with col2:
-    st.subheader("AI Analyst Chat")
+    st.subheader("AI Chat")
     
     if "messages" not in st.session_state:
-        st.session_state["messages"] = [
-            {"role": "assistant", "content": "Hello! I can analyze stocks for you. Ask me 'Is Apple a good buy right now?' or 'Compare Tesla and Ford'."}
-        ]
+        st.session_state["messages"] = [{"role": "assistant", "content": "Ask me to analyze a stock!"}]
 
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).write(msg["content"])
 
-    if prompt := st.chat_input("Ask about the stock market..."):
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        st.chat_message("user").write(prompt)
+    if user_input := st.chat_input("Ask something..."):
+        # Contexto automático
+        if ticker_input and ticker_input not in user_input.upper():
+            full_prompt = f"Analyze {ticker_input}: {user_input}"
+        else:
+            full_prompt = user_input
+            
+        st.session_state.messages.append({"role": "user", "content": user_input})
+        st.chat_message("user").write(user_input)
 
         with st.chat_message("assistant"):
             st_callback = StreamlitCallbackHandler(st.container())
-            # Pasamos el contexto del Ticker seleccionado en el dashboard al chat automáticamente
-            if ticker_input and ticker_input in prompt.upper():
-                pass # El usuario ya mencionó el ticker
-            elif ticker_input:
-                # Inyección de contexto: Si el usuario dice "¿Es buena compra?", asumimos que habla del ticker en pantalla
-                prompt = f"Regarding {ticker_input}: {prompt}"
-            
-            response = agent_executor.invoke({"input": prompt}, {"callbacks": [st_callback]})
-            st.write(response["output"])
-            st.session_state.messages.append({"role": "assistant", "content": response["output"]})
+            response = agent_executor.invoke(
+                {"input": full_prompt}, 
+                {"callbacks": [st_callback]}
+            )
+            output = response["output"]
+            st.write(output)
+            st.session_state.messages.append({"role": "assistant", "content": output})
