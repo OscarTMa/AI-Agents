@@ -38,7 +38,7 @@ def analyze_image(base64_image, prompt):
     try:
         completion = client.chat.completions.create(
             # Usamos el modelo específico de visión de Llama 3.2
-            model="llama-3.2-90b-vision-preview",
+            model="llama-3.2-11b-vision-preview",
             messages=[
                 {
                     "role": "user",
