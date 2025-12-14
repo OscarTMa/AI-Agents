@@ -1,9 +1,10 @@
 streamlit
-# Motor de Agentes
 crewai
-# Conexión con Groq
+# Dependencias de LangChain necesarias para las herramientas
 langchain-groq
-# Herramientas
+langchain-community
+langchain-core
+# Herramienta de búsqueda
 tavily-python
-# Estabilidad
-pydantic>=2.0.0
+# Compatibilidad
+pydantic
