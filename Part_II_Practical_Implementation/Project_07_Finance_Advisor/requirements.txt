@@ -1,12 +1,10 @@
 streamlit
 groq
-# Versiones específicas para estabilidad
-langchain==0.3.0
-langchain-community==0.3.0
-langchain-groq==0.2.0
-langchain-core==0.3.0
+langchain
+langchain-community
+langchain-groq
+langchain-core
 pydantic>=2.0.0
-# Financieras
 yfinance
 lxml
 pandas
