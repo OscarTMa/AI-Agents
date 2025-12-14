@@ -29,10 +29,11 @@ def transcribe_audio(audio_file):
     """Convierte audio a texto usando Whisper en Groq"""
     try:
         transcription = client.audio.transcriptions.create(
-            file=(audio_file.name, audio_file, "audio/wav"), # Formato requerido
-            model="distil-whisper-large-v3-en", # Modelo súper rápido
+            file=(audio_file.name, audio_file, "audio/wav"), 
+            # ⚠️ CORRECCIÓN: Usamos el modelo estándar actualizado
+            model="whisper-large-v3", 
             response_format="json",
-            language="en", # Forzamos inglés para mejor precisión (puedes cambiar a 'es')
+            language="en", # Cambia a "es" si quieres hablar en español
             temperature=0.0
         )
         return transcription.text
@@ -61,6 +62,7 @@ def text_to_speech(text):
     """Convierte la respuesta de texto a audio MP3"""
     try:
         # Usamos gTTS (Google Text-to-Speech)
+        # Nota: Si cambiaste Whisper a 'es', cambia aquí lang='es' también
         tts = gTTS(text=text, lang='en', slow=False)
         
         # Guardar en archivo temporal
@@ -79,7 +81,7 @@ st.subheader("Start talking...")
 audio_value = st.audio_input("Record a voice message")
 
 if audio_value:
-    st.audio(audio_value) # Reproducir lo que grabaste para confirmar
+    st.audio(audio_value) # Reproducir lo que grabaste
 
     with st.spinner("👂 Listening & Thinking..."):
         # A. Transcribir
@@ -98,5 +100,5 @@ if audio_value:
                 audio_file_path = text_to_speech(ai_response)
                 if audio_file_path:
                     st.audio(audio_file_path, format="audio/mp3", autoplay=True)
-                    # Limpieza del archivo temporal
+                    # Limpieza
                     os.remove(audio_file_path)
