@@ -1,120 +1,106 @@
 import streamlit as st
 import yfinance as yf
 from langchain_groq import ChatGroq
-from langchain.agents import AgentExecutor
+from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.callbacks import StreamlitCallbackHandler
+from langchain_core.tools import tool
 
-# --- IMPORTS PARA CONSTRUCCIÓN MANUAL DEL AGENTE ---
-from langchain.agents.format_scratchpad.openai_tools import format_to_openai_tool_messages
-from langchain.agents.output_parsers.openai_tools import OpenAIToolsAgentOutputParser
+# --- HERRAMIENTAS (Definidas aquí mismo para evitar errores de importación) ---
 
-# Importamos las herramientas de tools.py
-from tools import get_stock_info, get_historical_prices
+@tool
+def get_stock_info(symbol: str):
+    """Get current price, P/E ratio, and fundamental info of a stock ticker."""
+    try:
+        ticker = yf.Ticker(symbol)
+        info = ticker.info
+        data = {
+            "price": info.get("currentPrice"),
+            "marketCap": info.get("marketCap"),
+            "pe_ratio": info.get("trailingPE"),
+            "recommendation": info.get("recommendationKey"),
+            "summary": info.get("longBusinessSummary", "")[:200]
+        }
+        return str(data)
+    except Exception as e:
+        return f"Error: {e}"
 
+@tool
+def get_historical_prices(symbol: str):
+    """Get price trend over the last month."""
+    try:
+        ticker = yf.Ticker(symbol)
+        hist = ticker.history(period="1mo")
+        if hist.empty: return "No data."
+        start = hist['Close'].iloc[0]
+        end = hist['Close'].iloc[-1]
+        change = ((end - start) / start) * 100
+        return f"Start: {start:.2f}, End: {end:.2f}, Change: {change:.2f}%"
+    except Exception as e:
+        return f"Error: {e}"
+
+# --- CONFIGURACIÓN ---
 st.set_page_config(page_title="AI Financial Analyst", page_icon="📈", layout="wide")
-
 st.title("📈 Project 07: AI Financial Analyst")
-st.caption("Powered by Groq (Llama 3.3) & Yahoo Finance")
 
-# --- 1. CONFIGURACIÓN ---
 with st.sidebar:
-    st.header("Configuration")
     if "GROQ_API_KEY" in st.secrets:
         api_key = st.secrets["GROQ_API_KEY"]
     else:
         api_key = st.text_input("Groq API Key", type="password")
-    
-    st.markdown("Example Tickers: AAPL, NVDA, TSLA, MSFT")
 
 if not api_key:
-    st.warning("Please enter your Groq API Key.")
     st.stop()
 
-# --- 2. CONFIGURACIÓN DEL AGENTE (MANUAL FIX) ---
-
-tools = [get_stock_info, get_historical_prices] 
-
+# --- CEREBRO DEL AGENTE ---
 llm = ChatGroq(
     groq_api_key=api_key, 
     model_name="llama-3.3-70b-versatile",
     temperature=0
 )
 
-# Vinculamos las herramientas al LLM manualmente
-llm_with_tools = llm.bind_tools(tools)
+tools = [get_stock_info, get_historical_prices]
 
 prompt = ChatPromptTemplate.from_messages([
-    ("system", """You are a Wall Street Financial Analyst.
-    Use the provided tools to get REAL-TIME data. 
-    Do not guess prices.
-    
-    If the user asks about a company, ALWAYS check its fundamentals first.
-    End with: "⚠️ **Disclaimer:** Not financial advice."
-    """),
+    ("system", "You are a Financial Analyst. Use tools to get real data. Not financial advice."),
     ("human", "{input}"),
     ("placeholder", "{agent_scratchpad}"),
 ])
 
-# --- CONSTRUCCIÓN DE LA CADENA (PIPELINE) ---
-# En lugar de usar create_tool_calling_agent, conectamos los bloques nosotros mismos.
-# Esto evita el error de "coerce_to_runnable" en Python 3.13
-agent = (
-    {
-        "input": lambda x: x["input"],
-        "agent_scratchpad": lambda x: format_to_openai_tool_messages(x["intermediate_steps"]),
-    }
-    | prompt
-    | llm_with_tools
-    | OpenAIToolsAgentOutputParser()
-)
+# En LangChain 0.2.14, esto funciona perfectamente sin errores de Pydantic
+agent = create_tool_calling_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
-
-# --- 3. INTERFAZ ---
-
+# --- INTERFAZ ---
 col1, col2 = st.columns([1, 2])
-
 with col1:
-    st.subheader("Market Data")
-    ticker_input = st.text_input("Ticker Symbol:", value="NVDA").upper()
-    
-    if ticker_input:
+    ticker = st.text_input("Ticker:", value="NVDA").upper()
+    if ticker:
         try:
-            stock = yf.Ticker(ticker_input)
-            hist = stock.history(period="3mo")
-            if not hist.empty:
-                st.line_chart(hist['Close'], height=200)
-                curr = hist['Close'].iloc[-1]
-                st.metric("Price", f"${curr:.2f}")
-        except:
-            st.error("Ticker not found")
+            # Gráfico visual rápido
+            df = yf.Ticker(ticker).history(period="3mo")
+            if not df.empty:
+                st.line_chart(df['Close'], height=200)
+                st.metric("Price", f"${df['Close'].iloc[-1]:.2f}")
+        except: pass
 
 with col2:
-    st.subheader("AI Chat")
-    
     if "messages" not in st.session_state:
-        st.session_state["messages"] = [{"role": "assistant", "content": "Ask me to analyze a stock!"}]
-
+        st.session_state.messages = []
+    
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).write(msg["content"])
 
-    if user_input := st.chat_input("Ask something..."):
-        # Contexto automático
-        if ticker_input and ticker_input not in user_input.upper():
-            full_prompt = f"Analyze {ticker_input}: {user_input}"
-        else:
-            full_prompt = user_input
-            
-        st.session_state.messages.append({"role": "user", "content": user_input})
-        st.chat_message("user").write(user_input)
-
+    if query := st.chat_input("Ask analysis..."):
+        st.session_state.messages.append({"role": "user", "content": query})
+        st.chat_message("user").write(query)
+        
         with st.chat_message("assistant"):
-            st_callback = StreamlitCallbackHandler(st.container())
-            response = agent_executor.invoke(
-                {"input": full_prompt}, 
-                {"callbacks": [st_callback]}
-            )
-            output = response["output"]
-            st.write(output)
-            st.session_state.messages.append({"role": "assistant", "content": output})
+            # Contexto automático
+            final_prompt = f"Analyze {ticker}: {query}" if ticker else query
+            
+            st_cb = StreamlitCallbackHandler(st.container())
+            resp = agent_executor.invoke({"input": final_prompt}, {"callbacks": [st_cb]})
+            
+            st.write(resp["output"])
+            st.session_state.messages.append({"role": "assistant", "content": resp["output"]})
