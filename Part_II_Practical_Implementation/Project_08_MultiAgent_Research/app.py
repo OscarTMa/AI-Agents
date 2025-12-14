@@ -1,12 +1,13 @@
 import streamlit as st
+import os
 from crewai import Agent, Task, Crew, Process
-from langchain_groq import ChatGroq
-from langchain_core.tools import Tool
+from crewai.tools import BaseTool
+from pydantic import Field
 from tavily import TavilyClient
 
 # 1. CONFIGURACIÓN
 st.set_page_config(page_title="AI Research Team", page_icon="👥", layout="wide")
-st.title("👥 Project 08: Multi-Agent Research Team (Stable)")
+st.title("👥 Project 08: AI Research Team (Modern)")
 
 # 2. CREDENCIALES
 with st.sidebar:
@@ -24,81 +25,80 @@ with st.sidebar:
 if not groq_api_key or not tavily_api_key:
     st.stop()
 
-# 3. LLM (CEREBRO)
-llm = ChatGroq(
-    groq_api_key=groq_api_key,
-    model_name="llama-3.3-70b-versatile",
-    temperature=0.7
-)
+# --- 3. EL GRAN ENGAÑO (OPENAI MOCK) ---
+# Las versiones nuevas de CrewAI insisten en usar OpenAI.
+# Configuramos las variables de entorno para redirigir el tráfico a Groq.
 
-# 4. HERRAMIENTA DE BÚSQUEDA (Simple Wrapper)
-def search_tavily(query):
-    try:
-        client = TavilyClient(api_key=tavily_api_key)
-        return client.search(query=query, search_depth="basic", max_results=3)
-    except Exception as e:
-        return f"Error: {e}"
+os.environ["OPENAI_API_KEY"] = groq_api_key  # Usamos la clave de Groq
+os.environ["OPENAI_API_BASE"] = "https://api.groq.com/openai/v1" # Redirección
+os.environ["OPENAI_MODEL_NAME"] = "llama-3.3-70b-versatile" # Modelo
+# ---------------------------------------
 
-# En CrewAI 0.28, las herramientas son simples objetos Tool de LangChain
-search_tool = Tool(
-    name="Web Search",
-    func=search_tavily,
-    description="Useful to search the internet for news and facts."
-)
+# 4. HERRAMIENTA NATIVA (Para evitar errores de Pydantic)
+class TavilySearchTool(BaseTool):
+    name: str = "Web Search Tool"
+    description: str = "Search the internet for up-to-date information."
+    api_key: str = Field(..., description="Tavily API Key")
 
-# 5. CREACIÓN DEL EQUIPO
+    def _run(self, query: str) -> str:
+        try:
+            client = TavilyClient(api_key=self.api_key)
+            # Buscamos contexto básico
+            return str(client.search(query=query, search_depth="basic", max_results=3))
+        except Exception as e:
+            return f"Error: {e}"
+
+search_tool = TavilySearchTool(api_key=tavily_api_key)
+
+# 5. DEFINICIÓN DEL EQUIPO
 def create_crew(topic):
     
-    # Agente 1: Investigador
+    # Nota: En CrewAI moderno, si configuras las variables de entorno OPENAI_*,
+    # no necesitas pasar el 'llm' explícitamente, lo coge automático.
+
     researcher = Agent(
-        role='Senior Research Analyst',
-        goal=f'Find latest news about {topic}',
-        backstory="Expert analyst who loves facts and statistics.",
+        role='Senior Researcher',
+        goal=f'Find facts about {topic}',
+        backstory="You are an expert analyst who loves facts and statistics.",
         verbose=True,
-        allow_delegation=False,
         tools=[search_tool],
-        llm=llm # <--- IMPORTANTE: Asignamos Groq aquí
+        allow_delegation=False
     )
 
-    # Agente 2: Escritor
     writer = Agent(
-        role='Tech Blogger',
+        role='Tech Writer',
         goal='Write a blog post',
-        backstory="Famous writer who simplifies complex topics.",
+        backstory="You convert complex data into engaging stories.",
         verbose=True,
-        allow_delegation=False,
-        llm=llm # <--- IMPORTANTE: Asignamos Groq aquí
+        allow_delegation=False
     )
 
-    # Tareas
     task1 = Task(
-        description=f"Search for '{topic}'. Find key trends.",
-        expected_output="A summary report.",
+        description=f"Research '{topic}'. Find key trends.",
+        expected_output="A summary report with 5 bullet points.",
         agent=researcher
     )
 
     task2 = Task(
-        description="Write a blog post based on the research.",
+        description="Write a short blog post based on the research.",
         expected_output="A markdown blog post.",
         agent=writer
     )
 
-    # Equipo
     crew = Crew(
         agents=[researcher, writer],
         tasks=[task1, task2],
         verbose=True
-        # En la versión 0.28.8 no hace falta desactivar memoria explícitamente si no se usa
     )
 
     return crew
 
 # 6. INTERFAZ
-topic = st.text_input("Topic:", placeholder="e.g. AI Agents")
+topic = st.text_input("Topic:", placeholder="e.g. Agents in 2025")
 
-if st.button("🚀 Start Research"):
+if st.button("🚀 Launch"):
     if topic:
-        with st.spinner("Agents are working..."):
+        with st.spinner("Crew is working..."):
             try:
                 my_crew = create_crew(topic)
                 result = my_crew.kickoff()
