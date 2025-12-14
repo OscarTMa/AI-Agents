@@ -1,8 +1,5 @@
 streamlit
-# Esta versión específica es muy estable y amigable con Groq
-crewai==0.28.8
+crewai==0.86.0
 langchain-groq
-langchain-community
-langchain-core
 tavily-python
-pydantic>=2.0.0
+pydantic
