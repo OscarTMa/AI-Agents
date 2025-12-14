@@ -1,0 +1,4 @@
+streamlit
+groq
+# Librería estándar de Python para manipular imágenes
+Pillow
