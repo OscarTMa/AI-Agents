@@ -1,11 +1,13 @@
 streamlit
 groq
+# Versiones específicas para estabilidad
 langchain==0.3.0
 langchain-community==0.3.0
 langchain-groq==0.2.0
 langchain-core==0.3.0
-# Librerías financieras
+pydantic>=2.0.0
+# Financieras
 yfinance
-lxml>=4.9.1
+lxml
 pandas
 matplotlib
