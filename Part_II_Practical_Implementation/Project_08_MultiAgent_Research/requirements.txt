@@ -3,3 +3,5 @@ crewai==0.86.0
 langchain-groq
 tavily-python
 pydantic
+# --- LA CURA PARA EL ERROR DE PKG_RESOURCES ---
+setuptools
