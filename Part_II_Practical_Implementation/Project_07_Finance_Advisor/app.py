@@ -1,12 +1,15 @@
 import streamlit as st
 import yfinance as yf
-import pandas as pd
 from langchain_groq import ChatGroq
-from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain.agents import AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.callbacks import StreamlitCallbackHandler
 
-# Importamos las funciones ya decoradas
+# --- IMPORTS PARA CONSTRUCCIÓN MANUAL DEL AGENTE ---
+from langchain.agents.format_scratchpad.openai_tools import format_to_openai_tool_messages
+from langchain.agents.output_parsers.openai_tools import OpenAIToolsAgentOutputParser
+
+# Importamos las herramientas de tools.py
 from tools import get_stock_info, get_historical_prices
 
 st.set_page_config(page_title="AI Financial Analyst", page_icon="📈", layout="wide")
@@ -28,10 +31,8 @@ if not api_key:
     st.warning("Please enter your Groq API Key.")
     st.stop()
 
-# --- 2. CONFIGURACIÓN DEL AGENTE ---
+# --- 2. CONFIGURACIÓN DEL AGENTE (MANUAL FIX) ---
 
-# CAMBIO CRÍTICO: Simplemente pasamos la lista de funciones decoradas
-# Ya no usamos la clase Tool(...) manual que causaba el error
 tools = [get_stock_info, get_historical_prices] 
 
 llm = ChatGroq(
@@ -39,6 +40,9 @@ llm = ChatGroq(
     model_name="llama-3.3-70b-versatile",
     temperature=0
 )
+
+# Vinculamos las herramientas al LLM manualmente
+llm_with_tools = llm.bind_tools(tools)
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", """You are a Wall Street Financial Analyst.
@@ -52,8 +56,19 @@ prompt = ChatPromptTemplate.from_messages([
     ("placeholder", "{agent_scratchpad}"),
 ])
 
-# Ahora el agente puede "bindear" las herramientas correctamente
-agent = create_tool_calling_agent(llm, tools, prompt)
+# --- CONSTRUCCIÓN DE LA CADENA (PIPELINE) ---
+# En lugar de usar create_tool_calling_agent, conectamos los bloques nosotros mismos.
+# Esto evita el error de "coerce_to_runnable" en Python 3.13
+agent = (
+    {
+        "input": lambda x: x["input"],
+        "agent_scratchpad": lambda x: format_to_openai_tool_messages(x["intermediate_steps"]),
+    }
+    | prompt
+    | llm_with_tools
+    | OpenAIToolsAgentOutputParser()
+)
+
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
 
 # --- 3. INTERFAZ ---
@@ -66,7 +81,6 @@ with col1:
     
     if ticker_input:
         try:
-            # Gráfico simple sin IA para referencia visual
             stock = yf.Ticker(ticker_input)
             hist = stock.history(period="3mo")
             if not hist.empty:
