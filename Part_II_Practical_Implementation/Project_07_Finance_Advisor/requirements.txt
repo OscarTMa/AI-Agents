@@ -1,11 +1,14 @@
 streamlit
 groq
-# Volvemos a las versiones más modernas pero standard
-langchain
-langchain-community
-langchain-groq
-langchain-core
-# Librerías auxiliares críticas
+# --- BLOQUE DE ESTABILIDAD ---
+# Usamos la serie 0.2.x donde AgentExecutor SÍ existe y funciona.
+langchain==0.2.16
+langchain-community==0.2.16
+langchain-core==0.2.38
+langchain-groq==0.1.9
+langchain-text-splitters==0.2.4
+# -----------------------------
 yfinance
 pandas
 matplotlib
+lxml
