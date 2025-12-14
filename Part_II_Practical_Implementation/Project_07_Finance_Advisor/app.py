@@ -8,11 +8,27 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain.callbacks import StreamlitCallbackHandler
 from tools import get_stock_info, get_historical_prices
 
+# -----------------------------------------------
+# st.set_page_config(page_title="AI Financial Analyst", page_icon="📈", layout="wide")
+#
+# st.title("📈 Project 07: AI Financial Analyst")
+# st.caption("Powered by Groq (Llama 3.3) & Yahoo Finance")
 st.set_page_config(page_title="AI Financial Analyst", page_icon="📈", layout="wide")
 
-st.title("📈 Project 07: AI Financial Analyst")
-st.caption("Powered by Groq (Llama 3.3) & Yahoo Finance")
+st.write("🔄 Iniciando aplicación...") # Mensaje de debug en pantalla
 
+try:
+    import yfinance as yf
+    import pandas as pd
+    from langchain_groq import ChatGroq
+    # Verifica que la importación de tools funcione
+    from tools import get_stock_info, get_historical_prices
+    st.write("✅ Librerías importadas correctamente") # Mensaje de debug
+except Exception as e:
+    st.error(f"❌ Error crítico importando librerías: {e}")
+    st.stop()
+
+# -----------------------------------------------
 # --- 1. CONFIGURACIÓN ---
 with st.sidebar:
     st.header("Configuration")
