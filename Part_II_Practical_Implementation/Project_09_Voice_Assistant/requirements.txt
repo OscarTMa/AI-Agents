@@ -1,0 +1,7 @@
+streamlit
+groq
+# Librería de Google para generar voz (gratis)
+gTTS
+# Manejo de archivos de audio
+soundfile
+numpy
