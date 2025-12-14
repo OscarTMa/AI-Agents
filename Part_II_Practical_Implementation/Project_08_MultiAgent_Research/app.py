@@ -1,9 +1,15 @@
 import streamlit as st
+# Importamos os para el truco de la API Key
+import os
 from crewai import Agent, Task, Crew, Process
 from crewai.tools import BaseTool
 from langchain_groq import ChatGroq
 from pydantic import Field
 from tavily import TavilyClient
+
+# --- TRUCO: Configurar una API Key falsa para callar la validación de OpenAI ---
+# CrewAI a veces verifica que la variable exista aunque no la use.
+os.environ["OPENAI_API_KEY"] = "NA"
 
 # 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(page_title="AI Research Team", page_icon="👥", layout="wide")
@@ -35,103 +41,86 @@ llm = ChatGroq(
     temperature=0.7
 )
 
-# --- 🛠️ LA SOLUCIÓN: HERRAMIENTA NATIVA DE CREWAI ---
-# En lugar de importar TavilySearchResults de LangChain (que da error),
-# creamos nuestra propia clase compatible con CrewAI.
-
+# --- HERRAMIENTA NATIVA DE CREWAI ---
 class TavilySearchTool(BaseTool):
     name: str = "Web Search Tool"
     description: str = "Useful for searching the internet to find up-to-date information, news, and trends."
     api_key: str = Field(..., description="Tavily API Key")
 
     def _run(self, query: str) -> str:
-        """Execute the search query."""
         try:
             client = TavilyClient(api_key=self.api_key)
-            # Buscamos y devolvemos el contexto
             response = client.search(query=query, search_depth="basic", max_results=3)
             return str(response)
         except Exception as e:
             return f"Error searching: {e}"
 
-# Instanciamos la herramienta con tu clave
 search_tool = TavilySearchTool(api_key=tavily_api_key)
 
-# ------------------------------------------------------
-
-# 4. DEFINICIÓN DE AGENTES (LOS EMPLEADOS)
-
+# 4. DEFINICIÓN DE AGENTES
 def create_crew(topic):
-    # --- Agente 1: El Investigador Senior ---
+    # Agente 1: Investigador
     researcher = Agent(
         role='Senior Research Analyst',
         goal=f'Uncover cutting-edge developments in {topic}',
-        backstory="""You are an expert analyst at a top tech think tank.
-        Your job is to dig deep into the internet to find the latest news,
-        statistics, and trends. You hate vague information; you want facts.""",
+        backstory="""You are an expert analyst. You dig deep into the internet 
+        to find the latest news, statistics, and trends. You want facts.""",
         verbose=True,
         allow_delegation=False,
-        tools=[search_tool], # Usamos la herramienta nativa
+        tools=[search_tool],
         llm=llm
     )
 
-    # --- Agente 2: El Escritor Técnico ---
+    # Agente 2: Escritor
     writer = Agent(
         role='Tech Content Strategist',
         goal='Write a compelling blog post based on the research',
-        backstory="""You are a famous tech blogger known for simplifying complex topics.
-        You take dry research reports and turn them into engaging narratives.
-        You format everything in beautiful Markdown.""",
+        backstory="""You are a famous tech blogger. You take dry research reports 
+        and turn them into engaging narratives formatted in Markdown.""",
         verbose=True,
         allow_delegation=False,
         llm=llm
     )
 
-    # 5. DEFINICIÓN DE TAREAS (EL TRABAJO)
-    
+    # 5. TAREAS
     task1 = Task(
         description=f"""Conduct a comprehensive research about '{topic}'.
-        Identify key trends, latest news, and potential future impacts.
-        Compile your findings into a detailed summary.""",
-        expected_output="A detailed research report with bullet points and sources.",
+        Identify key trends, latest news, and potential future impacts.""",
+        expected_output="A research report with bullet points and sources.",
         agent=researcher
     )
 
     task2 = Task(
-        description="""Using the research report provided, write a high-quality blog post.
-        The post should have an engaging title, an introduction, main body sections, and a conclusion.
-        Use markdown formatting (## Headers, **Bold**, etc).""",
-        expected_output="A full blog post in Markdown format.",
+        description="""Write a blog post based on the research report.
+        Include a catchy title, intro, body, and conclusion in Markdown.""",
+        expected_output="A blog post in Markdown format.",
         agent=writer
     )
 
-    # 6. EL EQUIPO (CREW)
+    # 6. EQUIPO (FIX: Memory False)
     crew = Crew(
         agents=[researcher, writer],
         tasks=[task1, task2],
         process=Process.sequential,
-        verbose=True
+        verbose=True,
+        memory=False # <--- ESTO SOLUCIONA EL ERROR DE OPENAI
     )
 
     return crew
 
-# 7. INTERFAZ DE USUARIO
-
-topic = st.text_input("Enter a topic to research:", placeholder="e.g., The Future of AI Agents in 2025")
+# 7. INTERFAZ
+topic = st.text_input("Enter a topic:", placeholder="e.g., The Future of AI Agents")
 
 if st.button("🚀 Launch Crew"):
     if topic:
-        with st.spinner("🤖 The crew is working... (This may take a minute)"):
+        with st.spinner("🤖 The crew is working... (This may take 1-2 minutes)"):
             try:
-                # Inicializar y ejecutar
                 my_crew = create_crew(topic)
                 result = my_crew.kickoff()
-                
                 st.success("Mission Complete!")
                 st.markdown("## 📝 Final Blog Post")
                 st.markdown(result)
-                
             except Exception as e:
-                st.error(f"Error during execution: {e}")
+                st.error(f"Error: {e}")
     else:
         st.error("Please enter a topic.")
