@@ -1,10 +1,5 @@
 streamlit
 crewai
-# Dependencias de LangChain necesarias para las herramientas
 langchain-groq
-langchain-community
-langchain-core
-# Herramienta de búsqueda
 tavily-python
-# Compatibilidad
-pydantic
+pydantic>=2.0.0
