@@ -1,0 +1,9 @@
+streamlit
+# Motor de Agentes
+crewai
+# Conexión con Groq
+langchain-groq
+# Herramientas
+tavily-python
+# Estabilidad
+pydantic>=2.0.0
