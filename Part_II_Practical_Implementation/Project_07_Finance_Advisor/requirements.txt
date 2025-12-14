@@ -1,15 +1,11 @@
 streamlit
 groq
-# --- EL BLOQUE DE ESTABILIDAD ---
-# Usamos versiones específicas que sabemos que funcionan bien juntas
-langchain==0.2.14
-langchain-community==0.2.12
-langchain-core==0.2.33
-langchain-text-splitters==0.2.2
-langchain-groq==0.1.9
-# -------------------------------
-pydantic>=2.0.0
+# Volvemos a las versiones más modernas pero standard
+langchain
+langchain-community
+langchain-groq
+langchain-core
+# Librerías auxiliares críticas
 yfinance
-lxml
 pandas
 matplotlib
