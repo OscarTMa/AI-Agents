@@ -155,103 +155,44 @@ Performance tuning, latency, cost control
 
 “Future Evolution of AI Agents: from single to swarm intelligence”
 
-💻 PART II – PRACTICAL IMPLEMENTATION
-## Project 1: CSV Data Q&A Agent
+## 💻 PART II – PRACTICAL IMPLEMENTATION
+# 🤖 Generative AI Engineering Portfolio
+### By [Tu Nombre] | AI Solutions Architect
 
-Objective: Answer questions from CSV files
+![Python](https://img.shields.io/badge/Python-3.11-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-App-red) ![Llama 3](https://img.shields.io/badge/Llama%203-Powered-purple) ![CrewAI](https://img.shields.io/badge/CrewAI-Agents-orange) ![Gemini](https://img.shields.io/badge/Google-Gemini-green)
 
-Tech: LangChain + OpenAI + Pandas
+## 🚀 Overview
+Welcome to my repository of **Applied AI Agents**. This collection represents a journey from basic LLM integration to advanced Multi-Agent Orchestration and Multimodal Systems.
 
-Key topics: prompt templates, tool usage, vector search
+Each project solves a specific business use case using modern frameworks like **LangChain, CrewAI, Groq (LPU Inference), and Google Gemini**.
 
-GitHub folder: /data_agent/
+---
 
-## Project 2: Web Automation Agent
+## 📂 Project Index
 
-Objective: Scrape and summarize web content
+| ID | Project Name | Tech Stack | Business Use Case |
+| :--- | :--- | :--- | :--- |
+| **01** | **Conversational AI Core** | Groq, Llama 3, Streamlit | A low-latency chatbot engine capable of maintaining context and specific personas. |
+| **02** | **Automated Data Analyst** | Pandas Agent, CSV | Upload raw spreadsheets and get instant insights/graphs using natural language (No SQL needed). |
+| **03** | **Knowledge Base RAG** | FAISS, Embeddings | "Chat with your PDF". Semantic search system for querying private internal documents. |
+| **04** | **Live Web Researcher** | DuckDuckGo Tool | An agent connected to the internet to fetch real-time events and bypass LLM training cutoffs. |
+| **05** | **Video Content Summarizer** | YouTube API (Experimental) | Extracts transcripts from educational videos to generate study notes automatically. |
+| **06** | **Python Code Interpreter** | Python REPL, Sandbox | An agent that writes and *executes* real Python code to solve complex math or logic puzzles. |
+| **07** | **WallStreet Finance Analyst** | yFinance, LangChain Tools | Retrieves real-time stock prices and fundamentals to provide investment insights. |
+| **08** | **DeepResearch Crew** | **CrewAI**, Multi-Agent | A team of autonomous agents (Researcher + Writer) that collaborate to produce high-quality reports. |
+| **09** | **VoiceOps Assistant** | Whisper (STT), gTTS | Full voice-to-voice interface. Hear and speak to the AI with <500ms latency. |
+| **10** | **DocuVision OCR Engine** | **Google Gemini Vision** | Multimodal agent that "sees" invoices and charts, extracting data into clean JSON formats. |
 
-Tech: Playwright + LangChain
+---
 
-Includes: browser automation + summarization agent
+## 🛠️ Technologies & Frameworks used
+- **Orchestration:** LangChain, CrewAI.
+- **Models (Inference):** Llama 3.3 (via Groq), Google Gemini 1.5 Flash.
+- **Tools:** Tavily Search, Wikipedia, yFinance, DuckDuckGo.
+- **Frontend:** Streamlit.
+- **Vector Stores:** FAISS.
 
-GitHub folder: /web_agent/
-
-## Project 3: FAQ Support Agent
-
-Objective: triage and answer customer tickets
-
-Tech: FastAPI + Pinecone + OpenAI Functions
-
-Includes: context memory, retrieval, ranking
-
-## Project 4: Multi-Agent Collaboration System
-
-Objective: simulate a digital team (CEO, PM, Dev)
-
-Tech: CrewAI or AutoGen
-
-Architecture diagram + example conversation
-
-## Project 5: AI Research Assistant
-
-Objective: search, summarize, and cite sources
-
-Tech: LangChain + SerpAPI + ChromaDB
-
-Output: automatic reports in Markdown
-
-## Project 6: Streamlit AI Agent Dashboard
-
-Objective: interactive dashboard for managing agents
-
-Visualization: logs, task progress, reasoning chains
-
-Tech: Streamlit + FastAPI backend
-
-## Project 7: Deploying an Agent API
-
-Objective: expose your agent as an API endpoint
-
-Tech: FastAPI + Docker + AWS Lambda
-
-Includes: CI/CD pipeline + GitHub Actions
-
-## **Project Structure**
-```
-⚙️ GitHub Repository Structure Example
-Mastering-AI-Agents/
-│
-├── README.md
-├── requirements.txt
-├── notebooks/
-│   ├── 01_data_agent.ipynb
-│   ├── 02_web_agent.ipynb
-│   └── ...
-│
-├── src/
-│   ├── agents/
-│   ├── utils/
-│   └── config/
-│
-├── tests/
-│   └── test_agents.py
-│
-├── dashboards/
-│   └── streamlit_app.py
-│
-└── .github/
-    └── workflows/
-        └── ci.yml
-```
-
-🧭 Appendices
-
-### A. Key AI Agent Libraries and Resources
-
-### B. Recommended Courses and Docs
-
-### C. Prompts and Templates for LangChain
-
-### D. Troubleshooting and Optimization
-
-### E. Glossary of Agent Terminology
+## 📬 Contact
+Open to freelance opportunities and AI consulting.
+- **Email:** [Tu Email]
+- **LinkedIn:** [Tu Link]
