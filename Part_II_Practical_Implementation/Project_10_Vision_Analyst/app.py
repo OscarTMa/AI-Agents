@@ -1,106 +1,77 @@
 import streamlit as st
-import base64
-from groq import Groq
 from PIL import Image
-import io
+import google.generativeai as genai
 
 # 1. CONFIGURACIÓN
 st.set_page_config(page_title="Vision Analyst", page_icon="👁️", layout="centered")
 
-st.title("👁️ Project 10: Vision Analyst")
-st.caption("Powered by Groq (Llama 3.2 Vision). Upload an image and ask questions.")
+st.title("👁️ Project 10: Vision Analyst (Gemini)")
+st.caption("Powered by Google Gemini 1.5 Flash")
 
 # 2. CREDENCIALES
 with st.sidebar:
-    if "GROQ_API_KEY" in st.secrets:
-        api_key = st.secrets["GROQ_API_KEY"]
+    st.header("Credentials")
+    # Intentamos leer de secrets o input manual
+    if "GOOGLE_API_KEY" in st.secrets:
+        api_key = st.secrets["GOOGLE_API_KEY"]
     else:
-        api_key = st.text_input("Groq API Key", type="password")
+        api_key = st.text_input("Google API Key", type="password")
+    
+    st.info("Get your key at: aistudio.google.com")
 
 if not api_key:
-    st.warning("Please enter your Groq API Key.")
+    st.warning("Please enter your Google API Key.")
     st.stop()
 
-client = Groq(api_key=api_key)
+# Configurar el cliente de Google
+genai.configure(api_key=api_key)
 
-# 3. FUNCIONES UTILITARIAS
-
-def encode_image(image_file):
+# 3. FUNCIÓN DE ANÁLISIS
+def analyze_image(image, prompt):
     """
-    Convierte la imagen subida a formato Base64 para enviarla a la API.
-    """
-    return base64.b64encode(image_file.getvalue()).decode('utf-8')
-
-def analyze_image(base64_image, prompt):
-    """
-    Envía la imagen y la pregunta al modelo de visión.
+    Envía la imagen (objeto PIL) y el prompt a Gemini Flash.
     """
     try:
-        completion = client.chat.completions.create(
-            # Usamos el modelo específico de visión de Llama 3.2
-            model="llava-v1.5-7b-4096-preview",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text", 
-                            "text": prompt
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/jpeg;base64,{base64_image}"
-                            }
-                        }
-                    ]
-                }
-            ],
-            temperature=0.1, # Temperatura baja para ser precisos analizando
-            max_tokens=1024,
-        )
-        return completion.choices[0].message.content
+        # Instanciamos el modelo Flash (rápido y eficiente)
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        # Generamos contenido (Multimodal: Texto + Imagen)
+        response = model.generate_content([prompt, image])
+        
+        return response.text
     except Exception as e:
         return f"Error analyzing image: {e}"
 
 # 4. INTERFAZ DE USUARIO
 
-# Subida de imagen
-uploaded_file = st.file_uploader("Upload an image (Invoice, Chart, Photo)...", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Upload an image...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
-    # Mostrar la imagen
+    # Cargar y mostrar imagen
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image", use_column_width=True)
     
-    # Opciones de análisis predefinidas
-    st.markdown("### 🔍 What do you want to know?")
+    st.markdown("### 🔍 Ask Gemini")
     
     col1, col2, col3 = st.columns(3)
     prompt = None
     
-    if col1.button("📄 Describe Image"):
-        prompt = "Describe this image in detail. Be specific about visual elements."
+    if col1.button("📄 Describe"):
+        prompt = "Describe this image in detail."
     
-    if col2.button("📊 Extract Data (JSON)"):
-        prompt = "Extract all visible text and data from this image. Return ONLY a valid JSON format. Do not write explanations."
+    if col2.button("📊 Extract JSON"):
+        prompt = "Extract all visible text/data. Return ONLY valid JSON."
         
-    if col3.button("💰 Analyze Invoice"):
-        prompt = "This is an invoice. Extract the Vendor Name, Total Amount, and Date. Suggest a categorization for this expense."
+    if col3.button("💰 Invoice"):
+        prompt = "Extract Vendor, Date, and Total Amount from this invoice."
 
-    # Campo de texto libre
-    custom_prompt = st.chat_input("Or ask a specific question about the image...")
+    custom_prompt = st.chat_input("Ask something specific...")
     if custom_prompt:
         prompt = custom_prompt
 
-    # Ejecutar análisis
     if prompt:
-        with st.spinner("Analyzing pixels..."):
-            # 1. Codificar
-            base64_image = encode_image(uploaded_file)
-            # 2. Enviar a IA
-            response = analyze_image(base64_image, prompt)
-            
+        with st.spinner("Gemini is looking..."):
+            response = analyze_image(image, prompt)
             st.markdown("---")
             st.success("Analysis Complete")
             st.markdown(response)
