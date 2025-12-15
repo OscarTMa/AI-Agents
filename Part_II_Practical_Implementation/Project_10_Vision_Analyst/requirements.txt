@@ -1,4 +1,4 @@
 streamlit
-groq
-# Librería estándar de Python para manipular imágenes
+# Librería oficial de Google Gemini
+google-generativeai
 Pillow
