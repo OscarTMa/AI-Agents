@@ -1,5 +1,48 @@
 # AI-Agents
 
+## 💻 PART II – PRACTICAL IMPLEMENTATION
+# 🤖 Generative AI Engineering Portfolio
+### By OscarTM | AI Solutions Architect
+
+![Python](https://img.shields.io/badge/Python-3.11-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-App-red) ![Llama 3](https://img.shields.io/badge/Llama%203-Powered-purple) ![CrewAI](https://img.shields.io/badge/CrewAI-Agents-orange) ![Gemini](https://img.shields.io/badge/Google-Gemini-green)
+
+## 🚀 Overview
+Welcome to my repository of **Applied AI Agents**. This collection represents a journey from basic LLM integration to advanced Multi-Agent Orchestration and Multimodal Systems.
+
+Each project solves a specific business use case using modern frameworks like **LangChain, CrewAI, Groq (LPU Inference), and Google Gemini**.
+
+---
+
+## 📂 Project Index
+
+| ID | Project Name | Tech Stack | Business Use Case |
+| :--- | :--- | :--- | :--- |
+| **01** | **Conversational AI Core** | Groq, Llama 3, Streamlit | A low-latency chatbot engine capable of maintaining context and specific personas. |
+| **02** | **Automated Data Analyst** | Pandas Agent, CSV | Upload raw spreadsheets and get instant insights/graphs using natural language (No SQL needed). |
+| **03** | **Knowledge Base RAG** | FAISS, Embeddings | "Chat with your PDF". Semantic search system for querying private internal documents. |
+| **04** | **Live Web Researcher** | DuckDuckGo Tool | An agent connected to the internet to fetch real-time events and bypass LLM training cutoffs. |
+| **05** | **Video Content Summarizer** | YouTube API (Experimental) | Extracts transcripts from educational videos to generate study notes automatically. |
+| **06** | **Python Code Interpreter** | Python REPL, Sandbox | An agent that writes and *executes* real Python code to solve complex math or logic puzzles. |
+| **07** | **WallStreet Finance Analyst** | yFinance, LangChain Tools | Retrieves real-time stock prices and fundamentals to provide investment insights. |
+| **08** | **DeepResearch Crew** | **CrewAI**, Multi-Agent | A team of autonomous agents (Researcher + Writer) that collaborate to produce high-quality reports. |
+| **09** | **VoiceOps Assistant** | Whisper (STT), gTTS | Full voice-to-voice interface. Hear and speak to the AI with <500ms latency. |
+| **10** | **DocuVision OCR Engine** | **Google Gemini Vision** | Multimodal agent that "sees" invoices and charts, extracting data into clean JSON formats. |
+
+---
+
+## 🛠️ Technologies & Frameworks used
+- **Orchestration:** LangChain, CrewAI.
+- **Models (Inference):** Llama 3.3 (via Groq), Google Gemini 1.5 Flash.
+- **Tools:** Tavily Search, Wikipedia, yFinance, DuckDuckGo.
+- **Frontend:** Streamlit.
+- **Vector Stores:** FAISS.
+
+## 📬 Contact
+Open to freelance opportunities and AI consulting.
+- **Email:** oscartibaduiza@hotmail.com
+- **LinkedIn:** linkedin.com/in/oscartibaduiza
+
+
 🧩 PART I – THEORETICAL FOUNDATIONS
 ## Chapter 1. Introduction to AI Agents
 
@@ -155,44 +198,3 @@ Performance tuning, latency, cost control
 
 “Future Evolution of AI Agents: from single to swarm intelligence”
 
-## 💻 PART II – PRACTICAL IMPLEMENTATION
-# 🤖 Generative AI Engineering Portfolio
-### By [OscarTM] | AI Solutions Architect
-
-![Python](https://img.shields.io/badge/Python-3.11-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-App-red) ![Llama 3](https://img.shields.io/badge/Llama%203-Powered-purple) ![CrewAI](https://img.shields.io/badge/CrewAI-Agents-orange) ![Gemini](https://img.shields.io/badge/Google-Gemini-green)
-
-## 🚀 Overview
-Welcome to my repository of **Applied AI Agents**. This collection represents a journey from basic LLM integration to advanced Multi-Agent Orchestration and Multimodal Systems.
-
-Each project solves a specific business use case using modern frameworks like **LangChain, CrewAI, Groq (LPU Inference), and Google Gemini**.
-
----
-
-## 📂 Project Index
-
-| ID | Project Name | Tech Stack | Business Use Case |
-| :--- | :--- | :--- | :--- |
-| **01** | **Conversational AI Core** | Groq, Llama 3, Streamlit | A low-latency chatbot engine capable of maintaining context and specific personas. |
-| **02** | **Automated Data Analyst** | Pandas Agent, CSV | Upload raw spreadsheets and get instant insights/graphs using natural language (No SQL needed). |
-| **03** | **Knowledge Base RAG** | FAISS, Embeddings | "Chat with your PDF". Semantic search system for querying private internal documents. |
-| **04** | **Live Web Researcher** | DuckDuckGo Tool | An agent connected to the internet to fetch real-time events and bypass LLM training cutoffs. |
-| **05** | **Video Content Summarizer** | YouTube API (Experimental) | Extracts transcripts from educational videos to generate study notes automatically. |
-| **06** | **Python Code Interpreter** | Python REPL, Sandbox | An agent that writes and *executes* real Python code to solve complex math or logic puzzles. |
-| **07** | **WallStreet Finance Analyst** | yFinance, LangChain Tools | Retrieves real-time stock prices and fundamentals to provide investment insights. |
-| **08** | **DeepResearch Crew** | **CrewAI**, Multi-Agent | A team of autonomous agents (Researcher + Writer) that collaborate to produce high-quality reports. |
-| **09** | **VoiceOps Assistant** | Whisper (STT), gTTS | Full voice-to-voice interface. Hear and speak to the AI with <500ms latency. |
-| **10** | **DocuVision OCR Engine** | **Google Gemini Vision** | Multimodal agent that "sees" invoices and charts, extracting data into clean JSON formats. |
-
----
-
-## 🛠️ Technologies & Frameworks used
-- **Orchestration:** LangChain, CrewAI.
-- **Models (Inference):** Llama 3.3 (via Groq), Google Gemini 1.5 Flash.
-- **Tools:** Tavily Search, Wikipedia, yFinance, DuckDuckGo.
-- **Frontend:** Streamlit.
-- **Vector Stores:** FAISS.
-
-## 📬 Contact
-Open to freelance opportunities and AI consulting.
-- **Email:** [oscartibaduiza@hotmail.com]
-- **LinkedIn:** [linkedin.com/in/oscartibaduiza]
