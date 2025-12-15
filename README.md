@@ -157,7 +157,7 @@ Performance tuning, latency, cost control
 
 ## 💻 PART II – PRACTICAL IMPLEMENTATION
 # 🤖 Generative AI Engineering Portfolio
-### By [Tu Nombre] | AI Solutions Architect
+### By [OscarTM] | AI Solutions Architect
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-App-red) ![Llama 3](https://img.shields.io/badge/Llama%203-Powered-purple) ![CrewAI](https://img.shields.io/badge/CrewAI-Agents-orange) ![Gemini](https://img.shields.io/badge/Google-Gemini-green)
 
@@ -194,5 +194,5 @@ Each project solves a specific business use case using modern frameworks like **
 
 ## 📬 Contact
 Open to freelance opportunities and AI consulting.
-- **Email:** [Tu Email]
-- **LinkedIn:** [Tu Link]
+- **Email:** [oscartibaduiza@hotmail.com]
+- **LinkedIn:** [linkedin.com/in/oscartibaduiza]
