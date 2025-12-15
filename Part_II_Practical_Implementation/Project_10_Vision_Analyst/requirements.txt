@@ -1,4 +1,6 @@
 streamlit
-# Esta versión específica arregla muchos problemas de nombres
 google-generativeai>=0.8.0
 Pillow
+# Nuevas para manejo de datos
+pandas
+openpyxl
