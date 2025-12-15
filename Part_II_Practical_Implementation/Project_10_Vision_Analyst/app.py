@@ -32,8 +32,8 @@ def analyze_image(image, prompt):
     Envía la imagen (objeto PIL) y el prompt a Gemini Flash.
     """
     try:
-        # Instanciamos el modelo Flash (rápido y eficiente)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # CAMBIO: Usamos 'gemini-1.5-flash-latest' que suele ser más robusto
+        model = genai.GenerativeModel('gemini-1.5-flash-latest')
         
         # Generamos contenido (Multimodal: Texto + Imagen)
         response = model.generate_content([prompt, image])
